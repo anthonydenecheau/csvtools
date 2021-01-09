@@ -7,7 +7,7 @@ import (
 	"os"
 	"runtime"
 
-	"github.com/anthonydenecheau/golang-scc/extract"
+	"github.com/anthonydenecheau/goToolCsv/extract"
 )
 
 type CommandLine struct{}

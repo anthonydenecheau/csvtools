@@ -1,5 +1,5 @@
 set GO111MODULE=on
-go mod init github.com/anthonydenecheau/golang-scc
+go mod init github.com/anthonydenecheau/goToolCsv
 go mod vendor # if you have vendor/ folder, will automatically integrate
 go build
 

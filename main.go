@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/anthonydenecheau/golang-scc/cli"
+	"github.com/anthonydenecheau/goToolCsv/cli"
 )
 
 func main() {
