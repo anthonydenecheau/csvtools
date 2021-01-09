@@ -15,7 +15,7 @@ type CommandLine struct{}
 func (cli *CommandLine) printUsage() {
 	fmt.Println("Usage:")
 	fmt.Println(" [command] -directory DIRECTORY - consume csv files ")
-	fmt.Println(" command : readCSAU / readTC ")
+	fmt.Println(" choose command : readCSAU / readTC ")
 }
 
 func (cli *CommandLine) validateArgs() {
