@@ -7,14 +7,15 @@ import (
 	"os"
 	"runtime"
 
-	"github.com/anthonydenecheau/goToolCsv/extract"
+	"github.com/anthonydenecheau/csvtools/extract"
 )
 
 type CommandLine struct{}
 
 func (cli *CommandLine) printUsage() {
 	fmt.Println("Usage:")
-	fmt.Println(" readCSAU -directory DIRECTORY - parse [tc] files")
+	fmt.Println(" [command] -directory DIRECTORY - consume csv files ")
+	fmt.Println(" command : readCSAU / readTC ")
 }
 
 func (cli *CommandLine) validateArgs() {
