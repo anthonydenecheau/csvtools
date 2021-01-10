@@ -11,7 +11,8 @@ go run main.go readTC -directory C:\developpement\data\temp
 
 go run main.go find -prefix tc -directory C:\developpement\data\temp
 go run main.go read -prefix tc -directory C:\developpement\data\temp
-go run main.go process -prefix tc -directory C:\developpement\data\temp -out result.csv
+go run main.go process -prefix tc -directory C:\developpement\data\temp -out C:\developpement\data\temp\resultTc.csv
+go run main.go process -prefix tc -directory C:\developpement\data\temp -out C:\developpement\data\temp\resultCsau.csv
 
 ## References
 https://nicedoc.io/jszwec/csvutil

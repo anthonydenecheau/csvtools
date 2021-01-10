@@ -86,19 +86,21 @@ func (cli *CommandLine) process(directory string, prefix string, out string) {
 		log.Panic(err)
 	}
 
+	var outputs []string
 	for _, line := range lines {
 		if csau, ok := line.([]extract.LineCsau); ok {
 			for _, innerCsau := range csau {
-				fmt.Println(">", innerCsau.DtEpreuve, innerCsau.Organisateur, innerCsau.TatooChip)
+				outputs = append(outputs, fmt.Sprintf("%s;%s;%s", innerCsau.DtEpreuve, innerCsau.Organisateur, innerCsau.TatooChip))
 			}
 		}
 		if tc, ok := line.([]extract.LineTc); ok {
 			for _, innerTc := range tc {
-				fmt.Println(">", innerTc.DtEpreuve, innerTc.Organisateur, innerTc.TatooChip)
+				outputs = append(outputs, fmt.Sprintf("%s;%s;%s", innerTc.DtEpreuve, innerTc.Organisateur, innerTc.TatooChip))
 			}
 		}
 	}
-	fmt.Printf("process csv %s\n", prefix)
+	scan.Write(out, outputs)
+	fmt.Printf("process csv see %s\n", out)
 }
 
 func (cli *CommandLine) Run() {
@@ -114,7 +116,7 @@ func (cli *CommandLine) Run() {
 	readPrefix := readCmd.String("prefix", "", "The prefix of the filename")
 	processFrom := processCmd.String("directory", ".", "The directory to parse")
 	processPrefix := processCmd.String("prefix", "", "The prefix of the filename")
-	processOut := processCmd.String("out", "", "The filename of results")
+	processOut := processCmd.String("out", "", "The filename of merging results")
 
 	switch os.Args[1] {
 	case "find":

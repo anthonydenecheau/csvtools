@@ -38,6 +38,7 @@ type LineTc struct {
 }
 
 func visit(prefix *string, files *[]string) filepath.WalkFunc {
+
 	return func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			log.Fatal(err)
@@ -89,7 +90,6 @@ func setDecoder(csvfile *os.File, lineType interface{}) (dec *csvutil.Decoder, _
 	}
 
 	return dec, nil
-
 }
 
 func parseTcCSV(files []string) (lines []LineTc, _err error) {
@@ -153,6 +153,7 @@ func parseCsauCSV(files []string) (lines []LineCsau, _err error) {
 }
 
 func (extrac *ExtractCmd) ParseCSV(prefix string, files []string) (lines []interface{}, _err error) {
+
 	switch prefix {
 	case "csau":
 		var lines []LineCsau
@@ -165,5 +166,24 @@ func (extrac *ExtractCmd) ParseCSV(prefix string, files []string) (lines []inter
 	default:
 		return []interface{}{nil, nil}, fmt.Errorf("Couldn't recognized prefix %s", prefix)
 	}
+}
 
+func (extrac *ExtractCmd) Write(file string, outputs []string) {
+
+	f, err := os.Create(file)
+
+	if err != nil {
+		log.Panic(err)
+	}
+
+	defer f.Close()
+
+	writer := bufio.NewWriter(f)
+	for _, line := range outputs {
+		_, err := writer.WriteString(line + "\n")
+		if err != nil {
+			log.Fatalf("Got error while writing to a file. Err: %s", err.Error())
+		}
+	}
+	writer.Flush()
 }
