@@ -92,66 +92,6 @@ func setDecoder(csvfile *os.File, lineType interface{}) (dec *csvutil.Decoder, _
 
 }
 
-func (extrac *ExtractCmd) ParseCsauCSV(files []string) (lines []LineCsau, _err error) {
-
-	for _, file := range files {
-
-		log.Printf("ParseCSV >  %s", file)
-		csvfile, err := os.Open(file)
-		if err != nil {
-			return lines, errors.New("Couldn't open the csv file")
-		}
-		defer csvfile.Close()
-
-		dec, err := setDecoder(csvfile, LineCsau{})
-		if err != nil {
-			return lines, errors.New("Couldn't configure decoder")
-		}
-
-		for {
-			var l LineCsau
-			if err := dec.Decode(&l); err == io.EOF {
-				break
-			} else if err != nil {
-				return lines, fmt.Errorf("Couldn't decode csv line %s", err)
-			}
-			lines = append(lines, l)
-		}
-
-	}
-	return lines, nil
-}
-
-func (extrac *ExtractCmd) ParseTcCSV(files []string) (lines []LineTc, _err error) {
-
-	for _, file := range files {
-
-		log.Printf("ParseCSV >  %s", file)
-		csvfile, err := os.Open(file)
-		if err != nil {
-			return lines, errors.New("Couldn't open the csv file")
-		}
-		defer csvfile.Close()
-
-		dec, err := setDecoder(csvfile, LineTc{})
-		if err != nil {
-			return lines, errors.New("Couldn't configure decoder")
-		}
-
-		for {
-			var l LineTc
-			if err := dec.Decode(&l); err == io.EOF {
-				break
-			} else if err != nil {
-				return lines, errors.New("Couldn't decode csv line")
-			}
-			lines = append(lines, l)
-		}
-	}
-
-	return lines, nil
-}
-
 func parseTcCSV(files []string) (lines []LineTc, _err error) {
 
 	for _, file := range files {
