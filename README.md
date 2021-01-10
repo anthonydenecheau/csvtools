@@ -9,5 +9,9 @@ go build
 set GO111MODULE=on
 go run main.go readTC -directory C:\developpement\data\temp
 
+go run main.go find -prefix tc -directory C:\developpement\data\temp
+go run main.go read -prefix tc -directory C:\developpement\data\temp
+go run main.go process -prefix tc -directory C:\developpement\data\temp -out result.csv
+
 ## References
 https://nicedoc.io/jszwec/csvutil
